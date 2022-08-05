@@ -1,6 +1,11 @@
+require 'byebug'
+
 class PolyTreeNode
     
-    
+    def inspect
+        @value.inspect
+    end
+
     def initialize(value)
         @value = value
         @parent = nil
@@ -37,4 +42,20 @@ class PolyTreeNode
             raise "node is not a child"
         end
     end
+
+    def dfs(target_value)
+        if target_value == self.value
+            return self
+        else
+            self.children.each do |child|          
+                result = child.dfs(target_value)
+                return result if !result.nil?;
+            end
+        end
+        nil
+    end
+
+    
+
+
 end
